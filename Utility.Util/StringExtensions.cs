@@ -2,6 +2,9 @@
 
 namespace Utility.Util
 {
+    /// <summary>
+    /// String extension methods
+    /// </summary>
     public static class StringExtensions
     {
         /// <summary>

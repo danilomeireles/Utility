@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace Utility.Util
 {
+    /// <summary>
+    /// Linq extension methods
+    /// </summary>
     public static class LinqExtensions
     {
         /// <summary>
