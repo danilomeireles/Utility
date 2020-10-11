@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Utility.Util
@@ -34,6 +35,17 @@ namespace Utility.Util
         public static bool IsBetween<T>(this T actual, T lower, T upper) where T : IComparable<T>
         {
             return actual.CompareTo(lower) >= 0 && actual.CompareTo(upper) <= 0;
+        }
+
+        /// <summary>
+        /// Use this to remove the null check in the calling code
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="actual"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> actual)
+        {
+            return actual ?? Enumerable.Empty<T>();
         }
     }
 }
