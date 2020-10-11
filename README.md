@@ -1,2 +1,2 @@
 # Utility
-My Favorites Utility Classes and Extension Methods
+My favorites utility classes and extension methods.
