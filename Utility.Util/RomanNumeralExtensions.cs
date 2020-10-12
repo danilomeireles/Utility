@@ -28,8 +28,7 @@ namespace Utility.Util
             };
 
         private static readonly Regex validRomanNumeral = new Regex(
-            "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))"
-            + "?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
+            "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
             RegexOptions.Compiled);
 
         public static bool IsValidRomanNumeral(this string value)
@@ -41,7 +40,7 @@ namespace Utility.Util
         {
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
 
             value = value.ToUpperInvariant().Trim();
@@ -50,7 +49,7 @@ namespace Utility.Util
 
             if ((length == 0) || !value.IsValidRomanNumeral())
             {
-                throw new ArgumentException("Empty or invalid Roman numeral string.", "value");
+                throw new ArgumentException("Empty or invalid Roman numeral string.", nameof(value));
             }
 
             var total = 0;
@@ -84,7 +83,7 @@ namespace Utility.Util
 
             if ((value < MinValue) || (value > MaxValue))
             {
-                throw new ArgumentOutOfRangeException("value", value, "Argument out of Roman numeral range.");
+                throw new ArgumentOutOfRangeException(nameof(value), value, "Argument out of Roman numeral range.");
             }
 
             const int MaxRomanNumeralLength = 15;
