@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Utility.Util
@@ -104,6 +105,26 @@ namespace Utility.Util
         public static string RemoveFirst(this string source, int number)
         {
             return source.Substring(number);
+        }
+
+        /// <summary>
+        /// Checks if the string contains a decimal digit
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static bool ContainsDigit(this string source)
+        {
+            return source.Any(char.IsDigit);
+        }
+
+        /// <summary>
+        /// Checks if all the characters in the string are decimal digits
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static bool AreAllDigits(this string source)
+        {
+            return source.All(char.IsDigit);
         }
     }
 }
