@@ -24,7 +24,7 @@ namespace Utility.Util
             value = value.Trim();
 
             if (value.Length == 0)            
-                throw new ArgumentException("Must specify valid information for parsing in the string.", nameof(value));            
+                throw new ArgumentException("Empty string.", nameof(value));            
 
             var type = typeof(T);
 
@@ -62,6 +62,48 @@ namespace Utility.Util
             
             foreach (Match match in matches)            
                 yield return match.Value;            
-        }       
+        }
+
+        /// <summary>
+        /// Removes the last character from the string
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string RemoveLastCharacter(this string source)
+        {
+            return source[0..^1];
+        }
+
+        /// <summary>
+        /// Removes the last N characters from the string
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public static string RemoveLast(this string source, int number)
+        {
+            return source.Substring(0, source.Length - number);
+        }
+
+        /// <summary>
+        /// Removes the first character from the string
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string RemoveFirstCharacter(this string source)
+        {
+            return source.Substring(1);
+        }
+
+        /// <summary>
+        /// Removes the first N characters from the string
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public static string RemoveFirst(this string source, int number)
+        {
+            return source.Substring(number);
+        }
     }
 }
