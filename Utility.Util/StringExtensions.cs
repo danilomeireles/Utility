@@ -128,7 +128,7 @@ namespace Utility.Util
         }
 
         /// <summary>
-        /// Check if the string can be converted to int
+        /// Checks if the string can be converted to int
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
@@ -138,13 +138,23 @@ namespace Utility.Util
         }
 
         /// <summary>
-        /// Check if the string can be converted to long
+        /// Checks if the string can be converted to long
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
         public static bool IsLong(this string source)
         {
             return long.TryParse(source, out _);
+        }
+
+        /// <summary>
+        /// Checks if string contains only letter or numbers
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static bool ContainsOnlyLettersOrNumbers(this string source)
+        {
+            return source.All(x => char.IsLetterOrDigit(x));
         }
     }
 }
