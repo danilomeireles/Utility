@@ -126,5 +126,25 @@ namespace Utility.Util
         {
             return source.All(char.IsDigit);
         }
+
+        /// <summary>
+        /// Check if the string can be converted to int
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static bool IsInt(this string source)
+        {
+            return int.TryParse(source, out _);
+        }
+
+        /// <summary>
+        /// Check if the string can be converted to long
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static bool IsLong(this string source)
+        {
+            return long.TryParse(source, out _);
+        }
     }
 }
