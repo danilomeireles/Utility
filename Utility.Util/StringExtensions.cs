@@ -156,5 +156,16 @@ namespace Utility.Util
         {
             return source.All(x => char.IsLetterOrDigit(x));
         }
+
+        /// <summary>
+        /// Concatenates the strings with a provided separator
+        /// </summary>
+        /// <param name="strings"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
+        public static string Concact(this IEnumerable<string> strings, string separator)
+        {
+            return string.Join(separator, strings);
+        }
     }
 }
