@@ -102,8 +102,8 @@ namespace Utility.Util
 
     public class MethodParameter
     {
-        public Type Type { get; set; }
-        public object Value { get; set; }
+        public Type Type { get; set; } = default!;
+        public object Value { get; set; } = default!;
     }
 
     #endregion
