@@ -31,9 +31,14 @@ namespace Utility.Util
             "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
             RegexOptions.Compiled);
 
-        public static bool IsValidRomanNumeral(this string value)
+        private static bool IsMatchValidRomanNumeral(this string value)
         {
             return ValidRomanNumeral.IsMatch(value);
+        }
+
+        public static bool IsValidRomanNumeral(this string value)
+        {
+            return value.IsMatchValidRomanNumeral();
         }
 
         public static int ParseRomanNumeral(this string value)
@@ -47,7 +52,7 @@ namespace Utility.Util
 
             var length = value.Length;
 
-            if ((length == 0) || !value.IsValidRomanNumeral())
+            if ((length == 0) || !value.IsMatchValidRomanNumeral())
             {
                 throw new ArgumentException("Empty or invalid Roman numeral string.", nameof(value));
             }
@@ -78,16 +83,16 @@ namespace Utility.Util
 
         public static string ToRomanNumeralString(this int value)
         {
-            const int MinValue = 1;
-            const int MaxValue = 3999;
+            const int minValue = 1;
+            const int maxValue = 3999;
+            const int maxRomanNumeralLength = 15;
 
-            if ((value < MinValue) || (value > MaxValue))
+            if (value < minValue || value > maxValue)
             {
                 throw new ArgumentOutOfRangeException(nameof(value), value, "Argument out of Roman numeral range.");
             }
 
-            const int MaxRomanNumeralLength = 15;
-            var sb = new StringBuilder(MaxRomanNumeralLength);
+            var sb = new StringBuilder(maxRomanNumeralLength);
 
             foreach (var pair in RomanNumerals)
             {
