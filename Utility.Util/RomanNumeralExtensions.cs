@@ -9,7 +9,7 @@ namespace Utility.Util
     {
         private const int NumberOfRomanNumeralMaps = 13;
 
-        private static readonly Dictionary<string, int> romanNumerals =
+        private static readonly Dictionary<string, int> RomanNumerals =
             new Dictionary<string, int>(NumberOfRomanNumeralMaps)
             {
                 { "M", 1000 },
@@ -27,13 +27,13 @@ namespace Utility.Util
                 { "I", 1 }
             };
 
-        private static readonly Regex validRomanNumeral = new Regex(
+        private static readonly Regex ValidRomanNumeral = new Regex(
             "^(?i:(?=[MDCLXVI])((M{0,3})((C[DM])|(D?C{0,3}))?((X[LC])|(L?XX{0,2})|L)?((I[VX])|(V?(II{0,2}))|V)?))$",
             RegexOptions.Compiled);
 
         public static bool IsValidRomanNumeral(this string value)
         {
-            return validRomanNumeral.IsMatch(value);
+            return ValidRomanNumeral.IsMatch(value);
         }
 
         public static int ParseRomanNumeral(this string value)
@@ -57,11 +57,11 @@ namespace Utility.Util
 
             while (i > 0)
             {
-                var digit = romanNumerals[value[--i].ToString()];
+                var digit = RomanNumerals[value[--i].ToString()];
 
                 if (i > 0)
                 {
-                    var previousDigit = romanNumerals[value[i - 1].ToString()];
+                    var previousDigit = RomanNumerals[value[i - 1].ToString()];
 
                     if (previousDigit < digit)
                     {
@@ -89,7 +89,7 @@ namespace Utility.Util
             const int MaxRomanNumeralLength = 15;
             var sb = new StringBuilder(MaxRomanNumeralLength);
 
-            foreach (var pair in romanNumerals)
+            foreach (var pair in RomanNumerals)
             {
                 while (value / pair.Value > 0)
                 {

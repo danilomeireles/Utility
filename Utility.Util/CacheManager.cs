@@ -9,7 +9,7 @@ namespace Utility.Util
     /// <typeparam name="T">The object type</typeparam>
     public sealed class CacheManager<T>
     {
-        private static CacheManager<T> _instance = null;
+        private static CacheManager<T> _instance;
         private static readonly MemoryCache _cache = new MemoryCache(new MemoryCacheOptions());
 
         private CacheManager()

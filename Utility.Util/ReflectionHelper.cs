@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Utility.Util.Exceptions;
 
 namespace Utility.Util
 {
@@ -20,6 +21,10 @@ namespace Utility.Util
         {
             var type = instance.GetType();
             var propertyInfo = type.GetProperty(propertyName);
+
+            if (propertyInfo == null)
+                throw new OperationFailedException($"Property not found: '{propertyName}'.");
+
             propertyInfo.SetValue(instance, value, null);
         }
 
@@ -33,6 +38,10 @@ namespace Utility.Util
         {
             var type = instance.GetType();
             var propertyInfo = type.GetProperty(propertyName);
+
+            if (propertyInfo == null)
+                throw new OperationFailedException($"Property not found: '{propertyName}'.");
+
             return propertyInfo.GetValue(instance, null);
         }
 
@@ -61,6 +70,10 @@ namespace Utility.Util
         {
             var type = instance.GetType();
             var methodInfo = type.GetMethod(methodName, parameters.Select(x => x.Type).ToArray());
+
+            if (methodInfo == null)
+                throw new OperationFailedException($"Method not found.");
+
             return methodInfo.Invoke(instance, parameters.Select(x => x.Value).ToArray());
         }
 
@@ -77,8 +90,12 @@ namespace Utility.Util
             List<MethodParameter> parameters)
         {
             var methodInfo = type.GetMethod(methodName, parameters.Select(x => x.Type).ToArray());
+
+            if (methodInfo == null)
+                throw new OperationFailedException($"Method not found.");
+
             return methodInfo.Invoke(null, parameters.Select(x => x.Value).ToArray());
-        }        
+        }
     }
 
     #region Custom Types

@@ -4,11 +4,11 @@ using Utility.Util;
 
 namespace Utility.ConsoleApp
 {
-    class Program
+    public static class Program
     {
         static void Main(string[] args)
         {
-            
+
         }
     }
 }

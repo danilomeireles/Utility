@@ -21,7 +21,7 @@ namespace Utility.Util
         {
             try
             {
-                using var writer = new StreamWriter(LogFilePath, true, Encoding.UTF8);
+                await using var writer = new StreamWriter(LogFilePath, true, Encoding.UTF8);
                 await writer.WriteLineAsync($"[{DateTime.UtcNow:yyyy-MM-dd_HH:mm:ss}] {text}");
                 await writer.FlushAsync();
             }

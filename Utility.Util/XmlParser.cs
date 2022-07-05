@@ -35,18 +35,12 @@ namespace Utility.Util
         /// <returns>An instance of the specified type</returns>
         public static T Deserialize<T>(string xmlText)
         {
-            if (string.IsNullOrWhiteSpace(xmlText))            
-                return default;           
+            if (string.IsNullOrWhiteSpace(xmlText))
+                return default;
 
             var serializer = new XmlSerializer(typeof(T));
-            T result;
-
-            using (TextReader reader = new StringReader(xmlText))
-            {
-                result = (T)serializer.Deserialize(reader);
-            }
-
-            return result;
+            using TextReader reader = new StringReader(xmlText);
+            return (T)serializer.Deserialize(reader);
         }
     }
 }
