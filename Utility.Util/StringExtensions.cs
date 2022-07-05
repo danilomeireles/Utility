@@ -19,18 +19,18 @@ namespace Utility.Util
         /// <returns>The the corresponding enum</returns>
         public static T EnumParse<T>(this string value, bool ignoreCase = false)
         {
-            if (value == null)            
-                throw new ArgumentNullException(nameof(value));            
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
 
             value = value.Trim();
 
-            if (value.Length == 0)            
-                throw new ArgumentException("Empty string.", nameof(value));            
+            if (value.Length == 0)
+                throw new ArgumentException("Empty string.", nameof(value));
 
             var type = typeof(T);
 
-            if (!type.IsEnum)            
-                throw new ArgumentException("Type provided must be an Enum.", nameof(T));            
+            if (!type.IsEnum)
+                throw new ArgumentException("Type provided must be an Enum.", nameof(T));
 
             return (T)Enum.Parse(type, value, ignoreCase);
         }
@@ -58,11 +58,11 @@ namespace Utility.Util
         public static IEnumerable<string> SplitCamelCase(this string source)
         {
             const string pattern = @"[A-Z][a-z]*|[a-z]+|\d+";
-            
+
             var matches = Regex.Matches(source, pattern);
-            
-            foreach (Match match in matches)            
-                yield return match.Value;            
+
+            foreach (Match match in matches)
+                yield return match.Value;
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Utility.Util
         /// <returns></returns>
         public static string RemoveFirst(this string source, int number)
         {
-            return source.Substring(number);
+            return source[number..];
         }
 
         /// <summary>
@@ -148,13 +148,13 @@ namespace Utility.Util
         }
 
         /// <summary>
-        /// Checks if string contains only letter or numbers
+        /// Checks if the string contains only letter or numbers
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
         public static bool ContainsOnlyLettersOrNumbers(this string source)
         {
-            return source.All(x => char.IsLetterOrDigit(x));
+            return source.All(char.IsLetterOrDigit);
         }
 
         /// <summary>
@@ -163,9 +163,43 @@ namespace Utility.Util
         /// <param name="strings"></param>
         /// <param name="separator"></param>
         /// <returns></returns>
-        public static string Concact(this IEnumerable<string> strings, string separator)
+        public static string Concat(this IEnumerable<string> strings, string separator)
         {
             return string.Join(separator, strings);
+        }
+
+        /// <summary>
+        /// Converts the string to snake case
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static string ToSnakeCase(this string text)
+        {
+            var result = Regex.Replace(text, "[A-Z]", "_$0")
+                .ToLower()
+                .TrimStart('_')
+                .Replace(" ", "_");
+
+            while (result.Contains("__"))
+            {
+                result = result.Replace("__", "_");
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Checks if the string is in Base64
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static bool IsBase64String(this string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return false;
+
+            var bytes = new Span<byte>(new byte[text.Length]);
+            return Convert.TryFromBase64String(text, bytes , out _);
         }
     }
 }
