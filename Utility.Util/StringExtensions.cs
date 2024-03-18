@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Utility.Util;
@@ -126,5 +128,57 @@ public static class StringExtensions
 
         var bytes = new Span<byte>(new byte[text.Length]);
         return Convert.TryFromBase64String(text, bytes , out _);
+    }
+
+    public static string ReplaceAll(this string source, string oldValue, string newValue)
+    {
+        if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(oldValue))
+        {
+            return source;
+        }
+
+        return source.Replace(oldValue, newValue);
+    }
+
+    public static string Truncate(this string source, int maxLength, string ellipsis = "...")
+    {
+        if (string.IsNullOrEmpty(source) || source.Length <= maxLength)
+        {
+            return source;
+        }
+
+        return source[..maxLength] + ellipsis;
+    }
+
+    public static string ToTitleCase(this string source)
+    {
+        if (string.IsNullOrEmpty(source))
+        {
+            return source;
+        }
+
+        return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(source.ToLower());
+    }
+
+    public static string ToBase64(this string source)
+    {
+        if (string.IsNullOrEmpty(source))
+        {
+            return source;
+        }
+
+        var bytes = Encoding.UTF8.GetBytes(source);
+        return Convert.ToBase64String(bytes);
+    }
+
+    public static string FromBase64(this string source)
+    {
+        if (string.IsNullOrEmpty(source))
+        {
+            return source;
+        }
+
+        var bytes = Convert.FromBase64String(source);
+        return Encoding.UTF8.GetString(bytes);
     }
 }
