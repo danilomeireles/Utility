@@ -1,19 +1,18 @@
 using System;
 
-namespace Utility.Util.Exceptions
+namespace Utility.Util.Exceptions;
+
+public class OperationFailedException : Exception
 {
-    public class OperationFailedException : Exception
+    public OperationFailedException()
     {
-        public OperationFailedException()
-        {
-        }
+    }
 
-        public OperationFailedException(string message) : base(message)
-        {
-        }
+    public OperationFailedException(string message) : base(message)
+    {
+    }
 
-        public OperationFailedException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
+    public OperationFailedException(string message, Exception innerException) : base(message, innerException)
+    {
     }
 }
