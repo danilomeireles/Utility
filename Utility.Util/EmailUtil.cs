@@ -5,16 +5,8 @@ using System.Threading.Tasks;
 
 namespace Utility.Util
 {
-    /// <summary>
-    /// A simple email sender
-    /// </summary>
     public static class EmailUtil
-    {
-        /// <summary>
-        /// Sends an email
-        /// </summary>
-        /// <param name="senderInfo"></param>
-        /// <param name="emailInfo"></param>
+    {       
         public static async Task Send(SenderInfo senderInfo, EmailInfo emailInfo)
         {
             var recipientsString = emailInfo.Recipients.Concat(",");
