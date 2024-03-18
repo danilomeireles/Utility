@@ -181,4 +181,63 @@ public static class StringExtensions
         var bytes = Convert.FromBase64String(source);
         return Encoding.UTF8.GetString(bytes);
     }
+
+    public static byte[] ToByteArray(this string source, Encoding encoding)
+    {
+        if (string.IsNullOrEmpty(source))
+        {
+            return [];
+        }
+
+        return encoding.GetBytes(source);
+    }
+
+    public static bool ContainsAny(this string source, params string[] values)
+    {
+        if (string.IsNullOrEmpty(source) || values == null || values.Length == 0)
+        {
+            return false;
+        }
+
+        foreach (var value in values)
+        {
+            if (source.Contains(value))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static string RemoveAccents(this string source)
+    {
+        if (string.IsNullOrEmpty(source))
+        {
+            return source;
+        }
+
+        string normalizedString = source.Normalize(NormalizationForm.FormD);
+        StringBuilder stringBuilder = new();
+
+        foreach (char c in normalizedString)
+        {
+            if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+            {
+                stringBuilder.Append(c);
+            }
+        }
+
+        return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+    }
+
+    public static bool MatchesRegex(this string source, string pattern)
+    {
+        if (string.IsNullOrEmpty(source) || string.IsNullOrEmpty(pattern))
+        {
+            return false;
+        }
+
+        return Regex.IsMatch(source, pattern);
+    }
 }
