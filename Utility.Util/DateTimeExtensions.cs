@@ -20,4 +20,15 @@ public static class DateTimeExtensions
 
         return age;
     }
+
+    public static bool IsWeekend(this DateTime dateTime)
+    {
+        return dateTime.DayOfWeek == DayOfWeek.Saturday || dateTime.DayOfWeek == DayOfWeek.Sunday;
+    }
+
+    public static int DaysUntil(this DateTime dateTime, DateTime targetDate)
+    {
+        TimeSpan difference = targetDate.Date - dateTime.Date;
+        return difference.Days;
+    }
 }
